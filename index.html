@@ -14,31 +14,54 @@
 
 <body>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <h1 align="center" class="title">Lab: Pixel Art Maker</h1>
     </div>
     <div class="row">
+      <div class="col-1">
+      </div>
 
       <div class="col-4">
         <h2>Choose Grid Size</h2>
         <form id="sizePicker">
           Grid Height:
-          <input type="number" id="input_height" name="height" min="1" value="1"> Grid Width:
-          <input type="number" id="input_width" name="width" min="1" value="1">
-          <input type="submit">
+          <input type="number" id="table_height" name="height" min="10" value="10">
+          Grid Width:
+          <input type="number" id="table_width" name="width" min="10" value="10">
+          <!-- <input type="submit" onclick="makeGrid()"> -->
+          <div id="submit_grid">
+            <input type="submit" id="submit" value="Generate Grid" onclick="makeGrid">
+          </div>
         </form>
 
+        <div class="row">
+          <div class="col-5">
+            <h3>L-click color</h3>
+            <input type="color" id="colorPickerLeft">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-5">
+            <h3>R-click color</h3>
+            <input type="color" id="colorPickerRight">
+          </div>
+        </div>
+
+        <div class="row">
+          <button onclick="resetGrid()"> Reset grid </button>
+        </div>
       </div>
-      <div class="col-4">
-        <h2>Pick A Color</h2>
-        <input type="color" id="colorPicker">
-      </div>
+
 
       <div class="col-4">
         <h2>Design Canvas</h2>
         <table id="pixel_canvas"></table>
       </div>
+      <div class="col-1">
+      </div>
+
     </div>
   </div>
 
