@@ -1,5 +1,6 @@
 body {
-    text-align: center;
+    /*text-align: center;*/
+    background-color: lightgrey;
 }
 
 h2 {
@@ -37,4 +38,59 @@ input[type=number] {
     font-family: Monoton;
     font-size: 70px;
     margin: 50px auto;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.borderbottom {
+  border-bottom: 1px solid black;
+}
+
+.form-control.colorpicker {
+  height: 40px;
+  width: 40%;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-div {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.align-button {
+  display: flex;
+  align-items: center;
+}
+
+.white-background {
+  background-color: white;
+}
+
+input.form-control {
+  border-radius: 1.25rem;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .form-control.colorpicker {
+    width: 100%;
+  }
+
+  div.col-3 {
+    max-width: 100%;
+  }
 }

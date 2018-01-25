@@ -12,6 +12,10 @@ function resetGrid() {
   makeGrid();
 }
 
+function prova() {
+  console.log("prova");
+}
+
 function random_rgba() {
   let o = Math.round,
     r = Math.random,
