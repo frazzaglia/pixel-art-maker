@@ -1,5 +1,4 @@
-var pixel_table = $("#pixel_canvas");
-
+let pixel_table = $("#pixel_canvas");
 
 function clearGrid() {
   pixel_table.children().remove();
@@ -12,10 +11,6 @@ function resetGrid() {
   makeGrid();
 }
 
-function prova() {
-  console.log("prova");
-}
-
 function random_rgba() {
   let o = Math.round,
     r = Math.random,
@@ -23,12 +18,25 @@ function random_rgba() {
   return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }
 
+function random_fill(){
+  // if (typeof myVar != 'undefined')
+  const rowsNumber = pixel_table[0].rows.length;
+  const columnsNumber = pixel_table[0].rows[0].cells.length;
+
+  // pixel_table[0].rows[0].cells[0].style.backgroundColor = 'red';
+
+  
+  pixel_table.children()[0].cells[2].style.backgroundColor = "red";
+
+}
+
+function fillCellWithColor(element, color) {
+  element.css("background-color", color);
+}
+
 function makeGrid() {
   const table_height = $("#table_height").val();
   const table_width = $("#table_width").val();
-
-  console.log(table_height);
-  console.log(table_width);
   for(let i = 0; i < table_height; i++) {
     const row = pixel_table.append("<tr></tr>");
     for(let j = 0; j < table_width; j++) {
@@ -38,47 +46,29 @@ function makeGrid() {
     }
   }
 
-  // $("td").click(function() {
-  //   //var colorOne = $("#colorPickerLeft").val();
-  //   $(this).css("background-color", "red");
-  // });
-
   $("td").contextmenu(function() {
     event.preventDefault();
     let colorRight = $("#colorPickerRight").val();
-    $(this).css("background-color", colorRight);
+    fillCellWithColor($(this), colorRight);
   });
 
   $("td").dblclick(function() {
-    $(this).css("background-color", random_rgba());
+    fillCellWithColor($(this), random_rgba());
   });
-  //
-  //   $('td').scroll(function() {
-  //     debugger
-  //     didScroll = true;
-  // });
-
 
   $("td").mousedown(function(e) {
     switch(e.which) {
       case 1:
-        //left Click
+        // //left Click
         let colorLeft = $("#colorPickerLeft").val();
-        $(this).css("background-color", colorLeft);
+        fillCellWithColor($(this), colorLeft);
         break;
       case 2:
         //middle Click
-        console.log("middle");
-        $(this).css("background-color", "rgb(255, 255, 255)");
+        fillCellWithColor($(this), 'white');
         break;
-        // case 3:
-        //   //right Click
-        //   console.log("right");
-        //   e.preventDefault();
-        //   $(this).css("background-color", "blue");
-        //   break;
     }
-    return true; // to allow the browser to know that we handled it.
+    return true;
   });
 
 }
@@ -90,5 +80,15 @@ $("document").ready(function() {
     event.preventDefault();
     clearGrid();
     makeGrid();
+  });
+
+  $("#reset").click(function() {
+    event.preventDefault();
+    resetGrid();
+  });
+
+  $("#random_fill").click(function() {
+    event.preventDefault();
+    random_fill();
   });
 });
