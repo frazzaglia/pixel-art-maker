@@ -18,16 +18,19 @@ function random_rgba() {
   return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
 }
 
-function random_fill(){
-  // if (typeof myVar != 'undefined')
+function random_number(max, min) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function random_fill() {
   const rowsNumber = pixel_table[0].rows.length;
   const columnsNumber = pixel_table[0].rows[0].cells.length;
-
-  // pixel_table[0].rows[0].cells[0].style.backgroundColor = 'red';
-
-  
-  pixel_table.children()[0].cells[2].style.backgroundColor = "red";
-
+  let random_cells_to_fill = (rowsNumber*columnsNumber)/2;
+  for (let i = 0; i < random_cells_to_fill; i++) {
+    let random_row_number = random_number(0, rowsNumber);
+    let random_col_number = random_number(0, columnsNumber);
+    pixel_table.children()[random_row_number].cells[random_col_number].style.backgroundColor = random_rgba();
+  }
 }
 
 function fillCellWithColor(element, color) {
@@ -37,9 +40,9 @@ function fillCellWithColor(element, color) {
 function makeGrid() {
   const table_height = $("#table_height").val();
   const table_width = $("#table_width").val();
-  for(let i = 0; i < table_height; i++) {
+  for (let i = 0; i < table_height; i++) {
     const row = pixel_table.append("<tr></tr>");
-    for(let j = 0; j < table_width; j++) {
+    for (let j = 0; j < table_width; j++) {
       const cell = $("tr")
         .last()
         .append("<td></td>");
@@ -57,7 +60,7 @@ function makeGrid() {
   });
 
   $("td").mousedown(function(e) {
-    switch(e.which) {
+    switch (e.which) {
       case 1:
         // //left Click
         let colorLeft = $("#colorPickerLeft").val();
@@ -70,12 +73,11 @@ function makeGrid() {
     }
     return true;
   });
-
 }
 
 $("document").ready(function() {
   makeGrid();
-
+  
   $("#submit").click(function() {
     event.preventDefault();
     clearGrid();
