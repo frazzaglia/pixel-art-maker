@@ -1,4 +1,5 @@
 let pixel_table = $("#pixel_canvas");
+const maxTableSize = 50;
 
 function clearGrid() {
   pixel_table.children().remove();
@@ -37,7 +38,17 @@ function fillCellWithColor(element, color) {
   element.css("background-color", color);
 }
 
+function trimToLimit(size) {
+  if(size > maxTableSize) {
+    return maxTableSize;
+  }
+  return size;
+}
+
 function makeGrid() {
+  //Limit to maxTableSize (50) rows and columns number.
+  $("#table_height").val(trimToLimit($("#table_height").val()));
+  $("#table_width").val(trimToLimit($("#table_width").val()));
   const table_height = $("#table_height").val();
   const table_width = $("#table_width").val();
   for (let i = 0; i < table_height; i++) {
@@ -77,7 +88,7 @@ function makeGrid() {
 
 $("document").ready(function() {
   makeGrid();
-  
+
   $("#submit").click(function() {
     event.preventDefault();
     clearGrid();
