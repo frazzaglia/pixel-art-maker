@@ -1,5 +1,7 @@
 let pixel_table = $("#pixel_canvas");
 const maxTableSize = 50;
+let isMouseLeftPressed = false;
+let isMouseMiddlePressed = false;
 
 function clearGrid() {
   pixel_table.children().remove();
@@ -64,10 +66,29 @@ function makeGrid() {
     event.preventDefault();
     let colorRight = $("#colorPickerRight").val();
     fillCellWithColor($(this), colorRight);
+    isMouseRightPressed = true;
   });
 
   $("td").dblclick(function() {
     fillCellWithColor($(this), random_rgba());
+  });
+
+  $("td").mouseover(function() {
+    if(isMouseLeftPressed) {
+      let colorLeft = $("#colorPickerLeft").val();
+      fillCellWithColor($(this), colorLeft);
+    } else if(isMouseRightPressed) {
+      let colorRight = $("#colorPickerRight").val();
+      fillCellWithColor($(this), colorRight);
+    } else if(isMouseMiddlePressed) {
+      fillCellWithColor($(this), 'white');
+    }
+  });
+
+  $("td").mouseup(function() {
+    isMouseLeftPressed = false;
+    isMouseRightPressed = false;
+    isMouseMiddlePressed = false;
   });
 
   $("td").mousedown(function(e) {
@@ -76,10 +97,12 @@ function makeGrid() {
         // //left Click
         let colorLeft = $("#colorPickerLeft").val();
         fillCellWithColor($(this), colorLeft);
+        isMouseLeftPressed = true;
         break;
       case 2:
         //middle Click
         fillCellWithColor($(this), 'white');
+        isMouseMiddlePressed = true;
         break;
     }
     return true;
